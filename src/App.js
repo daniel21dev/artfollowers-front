@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch } from 'react-redux';
+import { getUserAction } from './actions/authActions';
+import { AppRouter } from './components/routes/AppRouter';
+
+
+const token = localStorage.getItem('token');
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  if( token ){
+    dispatch( getUserAction( token ) );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppRouter />
   );
 }
 

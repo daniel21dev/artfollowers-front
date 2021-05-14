@@ -1,0 +1,92 @@
+.profile_container {
+  width: 600px;
+  margin: 0 auto;
+  height: 400px;
+  margin-top: 4rem;
+  background: #cfd3e7;
+  border: 1px solid $secundary;
+  box-shadow: 0 0 5px $secundary;
+  position: relative;
+
+  .profile_hero {
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 0;
+    left: 0;
+  }
+
+  .profile_photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    position: absolute;
+    top: 135px;
+    left: 1rem;
+    border: 2px solid $secundary;
+  }
+
+  .profile_btns {
+    position: absolute;
+    top: 50%;
+    right: 3rem;
+    margin-top: 1rem;
+
+    .profile_btn {
+      background-color: transparent;
+      border-radius: 999px;
+      margin: 0 0.25rem;
+      padding: 10px;
+      color: $primary;
+      font-weight: 700;
+      border: 1px solid $primary;
+      //text-shadow: 0 0 3px $secundary;
+
+      &:hover {
+        color: white;
+        background-color: $primary;
+      }
+    }
+
+    i {
+      font-size: 0.8rem;
+    }
+  }
+
+  .profile_info {
+    width: 100%;
+    //height: 128px;
+    position: absolute;
+    z-index: 1;
+    padding: 0 1rem;
+    top: 270px;
+    //background-color: $back-color;
+
+    .user_name {
+      color: $secundary;
+      font-size: 1.5rem;
+      left: 1rem;
+      margin-bottom: 0;
+
+      span {
+        margin-top: 0;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+    }
+
+    .profile_desc {
+      margin-top: 5px;
+    }
+
+    .profile_followers {
+      margin-top: 5px;
+
+      a {
+        margin-right: 10px;
+      }
+    }
+  }
+}

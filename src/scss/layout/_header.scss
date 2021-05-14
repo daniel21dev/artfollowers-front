@@ -1,0 +1,53 @@
+.header {
+  height: 3.5rem;
+  border-bottom: 1.5px solid gray;
+  overflow: hidden;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  color: $font-primary;
+  top: 0;
+  z-index: 1;
+  padding: 0 1rem;
+  //box-shadow: 0 0 20px $secundary;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include small {
+    padding: 0 2rem;
+  }
+}
+
+.search {
+  display: flex;
+}
+
+.search-bar {
+  padding: 5px 1rem;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding: 5px;
+  border-radius: 10%;
+  background-color: darken($back-color, 10%);
+
+  .user-photo {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+  }
+}
+
+.search button {
+  background-color: $primary;
+  color: white;
+  border-radius: none;
+}

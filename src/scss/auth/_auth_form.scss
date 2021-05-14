@@ -1,0 +1,46 @@
+.auth_container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.auth_form {
+  width: 90%;
+  background-color: $back-color;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-shadow: 0 0 1rem $secundary;
+  border-radius: 1rem;
+
+  .form_control {
+    margin: 1rem 0;
+    padding: 10px;
+    border: 1px solid $secundary;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border: 2px solid $primary;
+    }
+  }
+
+  .btn_form {
+    border: 1px solid $primary;
+    background: $back-color;
+    color: darken($primary, 10%);
+    margin: 1rem 0;
+    padding: 10px;
+    transition: backgorund 1s ease-in-out;
+
+    &:hover {
+      background: $primary;
+      color: $back-color;
+    }
+  }
+
+  @include small {
+    width: 600px;
+  }
+}

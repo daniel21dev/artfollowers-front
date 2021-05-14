@@ -1,0 +1,15 @@
+.posts_container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 4.5rem;
+  color: $font-primary;
+  //height: calc(100vh - 7.5rem);
+
+  &p {
+    color: white;
+  }
+
+  @include small {
+    width: 600px;
+  }
+}
