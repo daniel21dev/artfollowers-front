@@ -28,6 +28,7 @@ export const AppRouter = () => {
 
                     <Route exact path='/' component={ Home } />
                     <Route path='/profile/:id' component={ Profile }/>
+                    {/* <Route path='/profile/followers' component={ }/> */}
                     <Redirect to='/' />
                 </Switch>
             </div>

@@ -26,6 +26,10 @@
     }
   }
 
+  .error {
+    border: 2px solid $error;
+  }
+
   .btn_form {
     border: 1px solid $primary;
     background: $back-color;

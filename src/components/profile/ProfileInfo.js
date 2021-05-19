@@ -7,8 +7,16 @@ import { ProfileDesc } from './ProfileDesc';
 
 export const ProfileInfo = ({profile,user,edit,setEdit}) => {
 
+    const initialFormValues = {
+        description: profile.description || ''
+    }
+
     const dispatch = useDispatch();
-    const [{description}, handleChange] = useForm({ description: profile?.description || ''});
+    const [{description}, handleChange] = useForm( initialFormValues );
+
+    if( !profile ){
+        return <p>...loading</p>
+    }
 
     const handleEdit = () =>{
         if( !edit ){

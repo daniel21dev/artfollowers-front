@@ -1,13 +1,18 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginAction } from './../../actions/authActions';
 import { useForm } from './../../hooks/useForm';
+import { Msg } from '../../hooks/Msg';
 
 export const Login = ({history}) => {
 
     const dispatch = useDispatch();
-    //const {user} = useSelector( state => state.auth);
+    const { error } = useSelector( state => state.auth );
+    const [fieldsError, setFieldsError] = useState({
+        error: false,
+        msg: ''
+    });
 
     const [formValues, handleChange] = useForm({
         email: 'daniel21@mail.com',
@@ -18,9 +23,12 @@ export const Login = ({history}) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        if( email.trim() === '' || password.trim() === ''){
-            console.log('esta vacio');
+        if( email.trim() === '' || !email.includes('@') ){
+            setFieldsError({ error: true, msg: 'The email is not valid'});
+        }else if(password.trim() === '' || password.length <6 ){
+            setFieldsError({ error: true, msg: 'The password is not valid'});
         }else{
+            setFieldsError({ error: false, msg: ''});
             dispatch( loginAction(email,password, history) );
         }
     }
@@ -29,9 +37,10 @@ export const Login = ({history}) => {
         <div className="auth_container">
             <form className="auth_form" onSubmit={ handleSubmit }>
             <h1>Log in</h1>
-
-            <input 
-                className="form_control"
+            { fieldsError.error && <Msg msg={ fieldsError.msg }  type={'error'} />}
+            { error && <Msg msg={ error }  type={'error'} /> }
+            <input  
+                className={`form_control`}
                 type="email" 
                 placeholder="Email"
                 name="email"
@@ -39,7 +48,7 @@ export const Login = ({history}) => {
                 onChange={ handleChange }
             />
             <input 
-                className="form_control"
+                className={`form_control`}
                 type="password" 
                 placeholder="Password" 
                 name="password"

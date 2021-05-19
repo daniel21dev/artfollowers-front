@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutAction } from '../../actions/authActions';
+import { resetProfileAction } from './../../actions/profileActions';
 
 
 export const Header = () => {
@@ -11,6 +12,7 @@ export const Header = () => {
 
     const handleLogout = ()=>{
         dispatch( logoutAction());
+        //dispatch( resetProfileAction() );
     }
 
     return (

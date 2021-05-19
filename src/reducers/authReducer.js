@@ -21,7 +21,6 @@ export default function authReducer( state = initialState, action ){
             }
         case types.LOGIN_USER_SUCCCESS:
             localStorage.setItem('token', action.payload);
-            
             return{
                 ...state,
                 token: action.payload,
@@ -34,24 +33,20 @@ export default function authReducer( state = initialState, action ){
                 user: action.payload,
                 loading: false,
                 loggedIn: true,
-                error: false
+                error: null
             }
         case types.LOGIN_USER_ERROR:
         case types.REGISTER_USER_ERROR:
         case types.GET_USER_ERROR:
             return{
                 ...state,
-                error: true,
+                error: action.payload,
                 loading: false
             }
         case types.LOGOUT:
+            localStorage.removeItem('token');
             return{
-                ...state,
-                loggedIn: false,
-                user: null,
-                token: null,
-                profile: null,
-                loading: false
+                ...initialState
             }
         default: 
             return state;

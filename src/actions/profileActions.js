@@ -11,8 +11,11 @@ export const getProfileAction = ( userID ) =>{
             const resp = await axiosClient.get('/profiles/'+userID);
             dispatch( getProfileSuccess( resp.data.profile ) );
         } catch (error) {
-            // TODO manage errors
-            dispatch( getProfileError( error ) );
+            if( error.resp?.data ){
+                dispatch( getProfileError( error.response.data.msg ) );
+            }else{
+                dispatch( getProfileError( 'Hubo un error' ) );
+            }
         }
     }
 }
@@ -29,7 +32,7 @@ const getProfileSuccess = (profile) =>({
 
 const getProfileError = error =>({
     type: types.GET_PROFILE_ERROR,
-    payload: true
+    payload: error
 });
 
 export const updateProfileAction = ( userID, description) =>{
@@ -44,8 +47,11 @@ export const updateProfileAction = ( userID, description) =>{
             });
             dispatch( updateProfileSuccess( resp.data.profile ) );
         } catch (error) {
-            // TODO manage errors
-            dispatch( updateProfileError( error ) );
+            if( error.resp?.data ){
+                dispatch( updateProfileError( error.response.data.msg ) );
+            }else{
+                dispatch( updateProfileError( 'Hubo un error' ) );
+            }
         }
     }
 }
@@ -62,5 +68,44 @@ const updateProfileSuccess = (profile) =>({
 
 const updateProfileError = error =>({
     type: types.UPDATE_PROFILE_ERROR,
-    payload: true
+    payload: error
 });
+
+export const followAction = ( followed ) =>{
+    return async( dispatch ) =>{
+
+        dispatch( follow() );
+        
+        try {
+            const resp = await axiosClient.post(`/follows/${followed}`,{
+                headers:{'x-token': localStorage.getItem('token')}
+            });
+            dispatch( followSuccess() );
+            dispatch( getProfileAction( followed ) );
+        } catch (error) {
+            console.log( error.response );
+            if( error.resp?.data ){
+                dispatch( followError( error.response.data.msg ) );
+            }else{
+                dispatch( followError( 'Hubo un error' ) );
+            }
+        }
+    }
+}
+
+const follow = () =>({
+    type: types.FOLLOW
+});
+
+const followSuccess = () =>({
+    type: types.FOLLOW_SUCCESS,
+});
+
+const followError = error =>({
+    type: types.FOLLOW_ERROR,
+    payload: error
+});
+
+export const resetProfileAction = () =>({
+    type: types.RESET_PROFILE
+})

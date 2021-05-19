@@ -13,9 +13,9 @@ export default function profileReducer( state = initialState, action ){
 
         case types.GET_PROFILE:
         case types.UPDATE_PROFILE:
+        case types.FOLLOW:
             return{
                 ...state,
-                profile: null,
                 loading: true,
                 error: false
             }
@@ -26,12 +26,22 @@ export default function profileReducer( state = initialState, action ){
                 profile: action.payload,
                 loading: false
             }
+        case types.FOLLOW_SUCCESS:
+            return{
+                ...state,
+                loading: false
+            }
         case types.GET_PROFILE_ERROR:
         case types.UPDATE_PROFILE_ERROR:
+        case types.FOLLOW_ERROR:
             return{
                 ...state,
                 loading: false,
-                error: true
+                error: action.payload
+            }
+        case types.RESET_PROFILE:
+            return{
+                ...initialState
             }
         default: 
             return state;

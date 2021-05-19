@@ -3,7 +3,8 @@ import {types} from '../types';
 const initialState = {
     posts:[],
     error: null,
-    loading: false
+    loading: false,
+    categories: []
 }
 
 
@@ -12,6 +13,7 @@ export default function postsReducer( state = initialState, action ){
     switch( action.type ){
 
         case types.GET_POSTS:
+        case types.GET_CATEGORIES:
             return{
                 ...state,
                 loading: true,
@@ -23,7 +25,14 @@ export default function postsReducer( state = initialState, action ){
                 posts: action.payload,
                 loading: false
             }
+        case types.GET_CATEGORIES_SUCCCESS:
+            return{
+                ...state,
+                categories: action.payload,
+                loading: false
+            }
         case types.GET_POSTS_ERROR:
+        case types.GET_CATEGORIES_ERROR:
             return{
                 ...state,
                 loading: false,

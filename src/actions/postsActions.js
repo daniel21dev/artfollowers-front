@@ -1,12 +1,17 @@
 import {types} from '../types';
 import axiosClient from './../config/axios';
 
-export const getPostsAction = () =>{
+export const getPostsAction = ( param='' ) =>{
     return async( dispatch ) =>{
         dispatch( getPosts() );
 
         try {
-            const resp = await axiosClient.get('/posts');
+            let resp;
+            if( param ){
+                resp = await axiosClient.get('/posts/'+param);
+            }else{
+                resp = await axiosClient.get('/posts');
+            }
             dispatch( getPostsSuccess( resp.data.posts ) );
         } catch (error) {
             dispatch( getPostsError() );
@@ -54,5 +59,33 @@ const likePostSuccess = (id, liked) =>({
 
 const likePostError = () =>({
     type: types.LIKE_POSTS_ERROR,
+    payload: true
+});
+
+export const getCategoriesAction = () =>{
+    return async( dispatch ) =>{
+        dispatch( getCategories() );
+
+        try {
+            const resp = await axiosClient.get('/categories');
+            dispatch( getCategoriesSucces( resp.data.categories) );
+        } catch (error) {
+            dispatch( getCategoriesError() );
+        }
+    }
+}
+
+const getCategories = () =>({
+    type: types.GET_CATEGORIES,
+    payload: true
+});
+
+const getCategoriesSucces = ( categories ) =>({
+    type: types.GET_CATEGORIES_SUCCCESS,
+    payload: categories
+});
+
+const getCategoriesError = () =>({
+    type: types.GET_CATEGORIES_ERROR,
     payload: true
 });

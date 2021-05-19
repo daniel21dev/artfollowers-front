@@ -4,6 +4,7 @@ import { getProfileAction } from '../../actions/profileActions';
 import { getPostsAction } from './../../actions/postsActions';
 import { ProfilePhotos } from './ProfilePhotos';
 import { ProfileInfo } from './ProfileInfo';
+import { resetProfileAction } from './../../actions/profileActions';
 
 export const ProfileContainer = ({id}) => {
 
@@ -13,6 +14,7 @@ export const ProfileContainer = ({id}) => {
     const dispatch = useDispatch();
     
     useEffect(()=>{
+        dispatch( resetProfileAction() );
         dispatch( getProfileAction(id) );
         dispatch( getPostsAction() );
     },[id, dispatch]);

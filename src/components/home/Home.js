@@ -3,7 +3,8 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { PostsContainers } from './PostsContainers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostsAction } from './../../actions/postsActions';
+import { getPostsAction, getCategoriesAction } from './../../actions/postsActions';
+
 
 export const Home = () => {
 
@@ -12,6 +13,7 @@ export const Home = () => {
 
     useEffect(()=>{
         dispatch( getPostsAction() );
+        dispatch( getCategoriesAction() );
     },[dispatch]);
 
     return (

@@ -1,27 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from './../../hooks/useForm';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerAction } from '../../actions/authActions';
+import { Msg } from '../../hooks/Msg';
 
 export const SignIn = () => {
 
     const dispatch = useDispatch();
+    const { error } = useSelector( state => state.auth );
+    const [fieldsError, setFieldsError] = useState({
+        error: false,
+        msg: ''
+    });
 
     const [values, handleChange] = useForm({
-        name: '',
-        email: '',
-        password: '',
-        userName: ''
+        name: 'adolf',
+        email: 'adolf@mail.com',
+        password: '123456',
+        userName: 'adolf'
     });
 
     const {name,userName,email,password} = values;
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        if( email.trim() === '' || password.trim() === '' || name.trim() === '' || userName.trim() === ''){
-            console.log('esta vacio');
+        if( email.trim() === '' || !email.includes('@') ){
+            setFieldsError({ error: true, msg: 'The email is not valid'});
+        }else if(password.trim() === '' || password.length <6 ){
+            setFieldsError({ error: true, msg: 'The password is not valid (password must have at least 6 characters)'});
+        }else if(name.trim() === ''){
+            setFieldsError({ error: true, msg: 'The name is necessary'});
+        }else if(userName.trim() === ''){
+            setFieldsError({ error: true, msg: 'The userName is necessary'});
         }else{
+            setFieldsError({ error: false, msg: ''});
             dispatch( registerAction(name,userName,email,password) );
         }
     }
@@ -30,7 +43,8 @@ export const SignIn = () => {
         <div className="auth_container">
             <form className="auth_form" onSubmit={ handleSubmit }>
             <h1>Sing In</h1>
-
+            { fieldsError.error && <Msg msg={ fieldsError.msg }  type={'error'} />}
+            { error && <Msg msg={ error }  type={'error'} /> }
             <input 
                 className="form_control"
                 type="name" 

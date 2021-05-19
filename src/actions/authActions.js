@@ -15,8 +15,12 @@ export const loginAction = (email,password, history) =>{
             dispatch( getUserAction( resp.data.token ) );
             history.push('/');
         } catch (error) {
-            // TODO manage errors
-            dispatch( loginUserError() );
+            //console.log( error.response.data.msg );
+            if( error.response?.data ){
+                dispatch( loginUserError( error.response.data.msg ) );
+            }else{
+                dispatch( registerUserError('there was an error') );
+            }
         }
     }
 }
@@ -31,9 +35,9 @@ const loginUserSuccess = token =>({
     payload: token
 });
 
-const loginUserError = () =>({
+const loginUserError = msgError =>({
     type: types.LOGIN_USER_ERROR,
-    payload: true
+    payload: msgError
 });
 
 export const getUserAction = ( token ) =>{
@@ -54,8 +58,12 @@ export const getUserAction = ( token ) =>{
             });
             dispatch( getUserSuccess( resp.data.user) );
         } catch (error) {
-            // TODO manage errors
-            dispatch( getUserError );
+            if( error.response?.data ){
+                dispatch( loginUserError( error.response.data.msg ) );
+            }else{
+                dispatch( registerUserError('there was an error') );
+                dispatch( logoutAction() );
+            }
         }
     }
 }
@@ -91,7 +99,11 @@ export const registerAction = (name,userName,email,password) =>{
             dispatch( loginAction({email,password}) );
         } catch (error) {
             // TODO manage errors
-            dispatch( registerUserError( error ) );
+            if( error.response?.data ){
+                dispatch( registerUserError(error.response.data?.errors[0].msg) );
+            }else{
+                dispatch( registerUserError('there was an error') );
+            }
         }
     }
 }
@@ -108,7 +120,7 @@ const registerUserSuccess = user =>({
 
 const registerUserError = error =>({
     type: types.REGISTER_USER_ERROR,
-    payload: true
+    payload: error
 });
 
 export const logoutAction = () =>{

@@ -9,6 +9,7 @@
 @import "./layout/profile";
 @import "./spinners/spinner";
 @import "./colors.scss";
+@import "./home/posts_options";
 
 *,
 *:before,
@@ -62,4 +63,11 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+.msg {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  font-weight: bold;
 }
