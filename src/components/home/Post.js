@@ -3,17 +3,22 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { likePostAction } from '../../actions/postsActions';
 
-export const Post = ({id,desc,media,user,title, likes}) => {
+export const Post = ({post, userID}) => {
 
     const dispatch = useDispatch();
+    const {_id:id, desc, media, userID:user ,title, likes}= post;
 
-    const handleLike = ()=> dispatch( likePostAction(id) ); 
+    const handleLike = ()=>{ 
+        if( userID ){
+            dispatch( likePostAction(id, userID) );
+        }
+    }
 
     return (
         <div className="post">
             <div className="post_info">
-                <img src={ user.img } alt="user profile"/>
-                <Link to={'/profile/'+user.uid} >{ user.userName }</Link>
+                <img src={ user?.img } alt="user profile"/>
+                <Link to={'/profile/'+user?.uid} >{ user?.userName }</Link>
             </div>
             <div className="post_preview">
                 <h3>{ title }</h3>
@@ -26,7 +31,12 @@ export const Post = ({id,desc,media,user,title, likes}) => {
             </div>
             <div className="post_interactions">
                 <p onClick={ handleLike }>
-                    <i  className="fas fa-heart"></i>{ likes } Likes
+                    {
+                        likes.includes( userID )
+                        ?<i  className="fas fa-heart"></i>
+                        :<i  className="far fa-heart"></i>
+                    }
+                    { likes.length } Likes
                 </p>
                 <p><i className="far fa-comments"></i> Comments</p>
             </div>

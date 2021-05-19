@@ -1,9 +1,24 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { Post } from './Post';
 import { PostsOptions } from './PostsOptions';
 import { CategoriesPanel } from './CategoriesPanel';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategoriesAction, getPostsAction } from '../../actions/postsActions';
 
-export const PostsContainers = ({posts=[]}) => {
+export const PostsContainers = () => {
+
+    const dispatch = useDispatch();
+    const {posts} = useSelector( state => state.posts );
+    const {user} = useSelector( state => state.auth );
+
+    useEffect(()=>{
+        dispatch( getPostsAction() );
+        dispatch( getCategoriesAction() );
+    },[dispatch, user]);
+
+    if( !posts ){
+        return <p>loading...</p>
+    }
 
     return (
         <main className="posts_container">
@@ -12,12 +27,8 @@ export const PostsContainers = ({posts=[]}) => {
             {
                 posts.map( post =>(
                     <Post key={ post._id } 
-                        id={ post._id }
-                        desc={post.desc}
-                        media={post.media}
-                        title={ post.title }
-                        user={ post.userID}
-                        likes={ post.likes }
+                        userID={ user?.id }
+                        post={ post }
                     />
                 ))
             }

@@ -45,9 +45,7 @@ export default function postsReducer( state = initialState, action ){
         case types.LIKE_POSTS_SUCCCESS:
             return{
                 ...state,
-                posts: state.posts.map( post => action.payload.id === action.payload 
-                    ? post.liked === action.payload.liked
-                    : post)
+                posts: evalLike( state.posts, action.payload )
             }
         case types.LIKE_POSTS_ERROR:
             return{
@@ -58,3 +56,21 @@ export default function postsReducer( state = initialState, action ){
             return state;
     }
 }
+
+
+const evalLike = (posts, payload) =>(
+    posts.map( post =>{
+
+        if( post._id !== payload.id ){
+            return post;
+        }
+
+        if( post.likes.includes( payload.userID ) ){
+            post.likes = post.likes.filter( like => like !== payload.userID );
+            return post;
+        }
+        
+        post.likes = [...post.likes, payload.userID];
+        return post;
+    })
+)
