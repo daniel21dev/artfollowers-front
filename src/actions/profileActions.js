@@ -11,7 +11,7 @@ export const getProfileAction = ( userID ) =>{
             const resp = await axiosClient.get('/profiles/'+userID);
             dispatch( getProfileSuccess( resp.data.profile ) );
         } catch (error) {
-            if( error.resp?.data ){
+            if( error.response?.data ){
                 dispatch( getProfileError( error.response.data.msg ) );
             }else{
                 dispatch( getProfileError( 'Hubo un error' ) );
@@ -47,9 +47,10 @@ export const updateProfileAction = ( userID, description) =>{
             });
             dispatch( updateProfileSuccess( resp.data.profile ) );
         } catch (error) {
-            if( error.resp?.data ){
+            if( error.response?.data ){
                 dispatch( updateProfileError( error.response.data.msg ) );
             }else{
+                console.log( error.response );
                 dispatch( updateProfileError( 'Hubo un error' ) );
             }
         }

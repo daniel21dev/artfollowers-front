@@ -5,11 +5,13 @@ import { getPostsAction } from './../../actions/postsActions';
 import { ProfilePhotos } from './ProfilePhotos';
 import { ProfileInfo } from './ProfileInfo';
 import { resetProfileAction } from './../../actions/profileActions';
+import { useParams } from 'react-router';
 
-export const ProfileContainer = ({id}) => {
+export const ProfileContainer = () => {
 
     const {profile} = useSelector( state => state.profile );
     const {user} = useSelector( state => state.auth );
+    const {id} = useParams();
     const [edit, setEdit] = useState(false);
     const dispatch = useDispatch();
     
@@ -20,11 +22,14 @@ export const ProfileContainer = ({id}) => {
     },[id, dispatch]);
 
     if( profile?.loading || !profile?.user ){
-        return (<div className="sipinner_container">
-                    <div className="lds-ripple">
-                        <div></div><div></div>
-                    </div>
-                </div>)
+        return (
+            <div className="sipinner_container">
+                <div className="lds-ripple">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        );
     }
 
     return (

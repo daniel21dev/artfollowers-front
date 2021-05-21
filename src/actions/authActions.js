@@ -13,7 +13,6 @@ export const loginAction = (email,password, history) =>{
             });
             dispatch( loginUserSuccess( resp.data.token ) );
             dispatch( getUserAction( resp.data.token ) );
-            history.push('/');
         } catch (error) {
             //console.log( error.response.data.msg );
             if( error.response?.data ){
@@ -35,9 +34,9 @@ const loginUserSuccess = token =>({
     payload: token
 });
 
-const loginUserError = msgError =>({
+const loginUserError = error =>({
     type: types.LOGIN_USER_ERROR,
-    payload: msgError
+    payload: error
 });
 
 export const getUserAction = ( token ) =>{
@@ -61,7 +60,7 @@ export const getUserAction = ( token ) =>{
             if( error.response?.data ){
                 dispatch( loginUserError( error.response.data.msg ) );
             }else{
-                dispatch( registerUserError('there was an error') );
+                dispatch( getUserError('there was an error') );
                 dispatch( logoutAction() );
             }
         }
@@ -78,9 +77,9 @@ const getUserSuccess = user =>({
     payload: user
 });
 
-const getUserError = () =>({
+const getUserError = error =>({
     type: types.GET_USER_ERROR,
-    payload: true
+    payload: error
 });
 
 export const registerAction = (name,userName,email,password) =>{
@@ -94,9 +93,7 @@ export const registerAction = (name,userName,email,password) =>{
                 email,
                 password
             });
-            //console.log( resp.data.user );
-            dispatch( registerUserSuccess( resp.data.user ) );
-            dispatch( loginAction({email,password}) );
+            dispatch( registerUserSuccess( {user: resp.data.user, token: resp.data.token }) );
         } catch (error) {
             // TODO manage errors
             if( error.response?.data ){

@@ -1,4 +1,5 @@
 import {types} from '../types';
+import { tokenAuth } from './../config/tokenauth';
 
 const initialState = {
     user: null,
@@ -21,12 +22,23 @@ export default function authReducer( state = initialState, action ){
             }
         case types.LOGIN_USER_SUCCCESS:
             localStorage.setItem('token', action.payload);
+            tokenAuth( action.payload );
             return{
                 ...state,
                 token: action.payload,
                 loading: false
             }
         case types.REGISTER_USER_SUCCCESS:
+            localStorage.setItem('token', action.payload);
+            tokenAuth( action.payload );
+            return{
+                ...state,
+                user: action.payload.user,
+                token: action.payload.token,
+                loading: false,
+                loggedIn: true,
+                error: null
+            }
         case types.GET_USER_SUCCESS:
             return{
                 ...state,

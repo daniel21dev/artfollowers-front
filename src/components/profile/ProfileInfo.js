@@ -29,7 +29,7 @@ export const ProfileInfo = ({profile,user,edit,setEdit}) => {
             // TODO handle error
             return;
         }
-        dispatch( updateProfileAction( user.id, description) );
+        dispatch( updateProfileAction( user._id, description) );
         setEdit(false);
     }
 

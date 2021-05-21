@@ -13,13 +13,13 @@ export const ProfileButtons = ({profile,handleEdit,user,edit,setEdit}) => {
             return history.push('/login');
         }
 
-        dispatch( followAction( profile.user.uid ) );
+        dispatch( followAction( profile.user.id ) );
     }
 
     return (
         <div className="profile_btns">
             {
-                user && (profile.user.uid === user.id)
+                user && (profile.user.id === user.id)
                 ?   <>
                         <button className="btn profile_btn"
                         onClick={ handleEdit }

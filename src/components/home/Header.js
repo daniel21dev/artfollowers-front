@@ -2,8 +2,6 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutAction } from '../../actions/authActions';
-import { resetProfileAction } from './../../actions/profileActions';
-
 
 export const Header = () => {
 
@@ -12,7 +10,6 @@ export const Header = () => {
 
     const handleLogout = ()=>{
         dispatch( logoutAction());
-        //dispatch( resetProfileAction() );
     }
 
     return (
@@ -29,14 +26,13 @@ export const Header = () => {
                     user
                     ?
                         <>
-                            <Link to={`/profile/${user.id}`}>{ user.name }</Link>
+                            <Link to={`/profile/${user.id }`}>{ user.name }</Link>
                             <img className="user-photo" src={user.img} alt="user"/>
                             <button className="btn" onClick={ handleLogout }>Salir</button>
                         </>
                     :
                         <>
                             <Link to='/login' className="btn">Log In</Link>
-                            {/* <img className="user-photo" src={user.img} alt="user"/> */}
                         </>
                 }
                 <>

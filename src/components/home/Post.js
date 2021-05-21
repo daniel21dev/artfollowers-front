@@ -6,11 +6,11 @@ import { likePostAction } from '../../actions/postsActions';
 export const Post = ({post, userID}) => {
 
     const dispatch = useDispatch();
-    const {_id:id, desc, media, userID:user ,title, likes}= post;
+    const {_id, desc, media, userID:user ,title, likes}= post;
 
     const handleLike = ()=>{ 
         if( userID ){
-            dispatch( likePostAction(id, userID) );
+            dispatch( likePostAction(_id, userID) );
         }
     }
 
@@ -18,7 +18,7 @@ export const Post = ({post, userID}) => {
         <div className="post">
             <div className="post_info">
                 <img src={ user?.img } alt="user profile"/>
-                <Link to={'/profile/'+user?.uid} >{ user?.userName }</Link>
+                <Link to={'/profile/'+user?._id} >{ user?.userName }</Link>
             </div>
             <div className="post_preview">
                 <h3>{ title }</h3>
