@@ -1,5 +1,5 @@
 .profile_container {
-  width: 600px;
+  width: 90%;
   margin: 0 auto;
   height: 400px;
   margin-top: 4rem;
@@ -7,6 +7,10 @@
   border: 1px solid $secundary;
   box-shadow: 0 0 5px $secundary;
   position: relative;
+
+  @include small() {
+    width: 600px;
+  }
 
   .profile_hero {
     background-position: center;
@@ -84,8 +88,9 @@
     .profile_followers {
       margin-top: 5px;
 
-      a {
+      p {
         margin-right: 10px;
+        display: inline-block;
       }
     }
   }

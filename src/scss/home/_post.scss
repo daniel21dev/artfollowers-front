@@ -49,9 +49,9 @@
 .post_interactions {
   display: flex;
 
-  p {
+  button {
     margin-right: 1rem;
-
+    z-index: 1;
     &:hover {
       color: $primary;
     }

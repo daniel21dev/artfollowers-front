@@ -7,6 +7,7 @@ import { SignIn } from '../auth/SignIn';
 import { Home } from './../home/Home';
 import { Profile } from './../profile/Profile';
 import { useSelector } from 'react-redux';
+import { Followers } from './../profile/Followers';
 
 
 export const AppRouter = () => {
@@ -28,7 +29,6 @@ export const AppRouter = () => {
 
                     <Route exact path='/' component={ Home } />
                     <Route path='/profile/:id' component={ Profile }/>
-                    {/* <Route path='/profile/followers' component={ }/> */}
                     <Redirect to='/' />
                 </Switch>
             </div>

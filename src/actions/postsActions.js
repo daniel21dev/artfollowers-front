@@ -1,14 +1,14 @@
 import {types} from '../types';
 import axiosClient from './../config/axios';
 
-export const getPostsAction = ( me=null ) =>{
+export const getPostsAction = ( userID='' ) =>{
     return async( dispatch ) =>{
         dispatch( getPosts() );
 
         try {
             let resp;
-            if( me ){
-                resp = await axiosClient.get('/posts?me='+me);
+            if( userID.length >1 ){
+                resp = await axiosClient.get('/posts?user='+userID);
             }else{
                 resp = await axiosClient.get('/posts');
             }

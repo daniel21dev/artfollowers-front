@@ -55,6 +55,12 @@ export default function authReducer( state = initialState, action ){
                 error: action.payload,
                 loading: false
             }
+        case types.SET_TOKEN:
+            const token = localStorage.getItem('token');
+            return{
+                ...state,
+                token
+            }
         case types.LOGOUT:
             localStorage.removeItem('token');
             return{

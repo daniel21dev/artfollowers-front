@@ -13,16 +13,16 @@ export const ProfileButtons = ({profile,handleEdit,user,edit,setEdit}) => {
             return history.push('/login');
         }
 
-        dispatch( followAction( profile.user.id ) );
+        dispatch( followAction( profile.user._id, user._id ) );
     }
 
     return (
         <div className="profile_btns">
             {
-                user && (profile.user.id === user.id)
+                user && (profile.user._id === user._id)
                 ?   <>
                         <button className="btn profile_btn"
-                        onClick={ handleEdit }
+                            onClick={ handleEdit }
                         >
                             { edit ? 'Save' : 'Edit' }
                             <i className="fas fa-pen"></i>
@@ -39,7 +39,7 @@ export const ProfileButtons = ({profile,handleEdit,user,edit,setEdit}) => {
                     <button className="btn profile_btn"
                         onClick={ handleFollow }
                     >
-                        { profile.following ? 'Unfollow': 'Follow'}
+                        { profile.imfollowing ? 'Unfollow': 'Follow'}
                     </button>
                 </>
             }

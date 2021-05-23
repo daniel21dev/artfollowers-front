@@ -1,14 +1,21 @@
 import axiosClient from './../config/axios';
 import { types } from './../types/index';
 
-export const getProfileAction = ( userID ) =>{
+export const getProfileAction = ( userID, me ) =>{
     return async( dispatch ) =>{
 
         dispatch( getProfile() );
-        
+
+        let  url = `/profiles/${userID}`;
+        if( me ){
+            url = url + '?me=' + me;
+        }
+
+        console.log( url );
+
         try {
             //return console.log('dispatch');
-            const resp = await axiosClient.get('/profiles/'+userID);
+            const resp = await axiosClient.get(url);
             dispatch( getProfileSuccess( resp.data.profile ) );
         } catch (error) {
             if( error.response?.data ){
@@ -72,7 +79,7 @@ const updateProfileError = error =>({
     payload: error
 });
 
-export const followAction = ( followed ) =>{
+export const followAction = ( followed, me ) =>{
     return async( dispatch ) =>{
 
         dispatch( follow() );
@@ -82,10 +89,9 @@ export const followAction = ( followed ) =>{
                 headers:{'x-token': localStorage.getItem('token')}
             });
             dispatch( followSuccess() );
-            dispatch( getProfileAction( followed ) );
+            dispatch( getProfileAction( followed, me ) );
         } catch (error) {
-            console.log( error.response );
-            if( error.resp?.data ){
+            if( error.response?.data ){
                 dispatch( followError( error.response.data.msg ) );
             }else{
                 dispatch( followError( 'Hubo un error' ) );
@@ -104,6 +110,37 @@ const followSuccess = () =>({
 
 const followError = error =>({
     type: types.FOLLOW_ERROR,
+    payload: error
+});
+
+export const getFollowersAction = ( followed ) =>{
+    return async( dispatch ) =>{
+
+        dispatch( getFollowers() );
+        
+        try {
+            const resp = await axiosClient.get(`/follows/followers/${followed}`);
+            dispatch( getFollowersSuccess( resp.data.followers ) );
+        } catch (error) {
+            if( error.response?.data ){
+                dispatch( getFollowersError( error.response.data.msg ) );
+            }else{
+                dispatch( getFollowersError( 'Hubo un error' ) );
+            }
+        }
+    }
+}
+
+const getFollowers = () =>({
+    type: types.GET_FOLLOWERS
+});
+
+const getFollowersSuccess = () =>({
+    type: types.GET_FOLLOWERS_SUCCESS
+});
+
+const getFollowersError = error =>({
+    type: types.GET_FOLLOWERS_ERROR,
     payload: error
 });
 

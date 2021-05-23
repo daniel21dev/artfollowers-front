@@ -26,8 +26,8 @@ export const Header = () => {
                     user
                     ?
                         <>
-                            <Link to={`/profile/${user.id }`}>{ user.name }</Link>
-                            <img className="user-photo" src={user.img} alt="user"/>
+                            <Link to={`/profile/${user._id }`}>{ user.name }</Link>
+                            <img className="user-photo" src={user.img || 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png'} alt="user"/>
                             <button className="btn" onClick={ handleLogout }>Salir</button>
                         </>
                     :

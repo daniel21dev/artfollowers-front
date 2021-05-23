@@ -120,6 +120,16 @@ const registerUserError = error =>({
     payload: error
 });
 
+export const setTokenAction = () =>{
+    return ( dispatch ) =>{
+        dispatch( setToken() );
+    }
+}
+
+const setToken = () =>({
+    type: types.SET_TOKEN
+});
+
 export const logoutAction = () =>{
     localStorage.removeItem('token');
     return ( dispatch ) =>{
@@ -130,4 +140,5 @@ export const logoutAction = () =>{
 const logout = () =>({
     type: types.LOGOUT
 });
+
 

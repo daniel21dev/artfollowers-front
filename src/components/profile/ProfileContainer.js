@@ -5,20 +5,18 @@ import { getPostsAction } from './../../actions/postsActions';
 import { ProfilePhotos } from './ProfilePhotos';
 import { ProfileInfo } from './ProfileInfo';
 import { resetProfileAction } from './../../actions/profileActions';
-import { useParams } from 'react-router';
 
-export const ProfileContainer = () => {
+export const ProfileContainer = ({id}) => {
 
     const {profile} = useSelector( state => state.profile );
     const {user} = useSelector( state => state.auth );
-    const {id} = useParams();
     const [edit, setEdit] = useState(false);
     const dispatch = useDispatch();
     
     useEffect(()=>{
         dispatch( resetProfileAction() );
-        dispatch( getProfileAction(id) );
         dispatch( getPostsAction() );
+        dispatch( getProfileAction(id, user?._id) );
     },[id, dispatch]);
 
     if( profile?.loading || !profile?.user ){

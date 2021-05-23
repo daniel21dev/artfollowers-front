@@ -28,10 +28,6 @@ body {
   background-color: darken($back-color, 15%);
 }
 
-::-webkit-scrollbar-track {
-  background: red;
-}
-
 .container {
   min-height: 100vh;
 }
@@ -46,6 +42,7 @@ body {
 .btn {
   border: none;
   border-radius: 5px;
+  background-color: unset;
 
   &:hover {
     cursor: pointer;
@@ -70,4 +67,17 @@ a {
   padding: 1rem;
   border-radius: 5px;
   font-weight: bold;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
 }

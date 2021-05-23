@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { getUserAction } from './actions/authActions';
+import { getUserAction, setTokenAction } from './actions/authActions';
 import { AppRouter } from './components/routes/AppRouter';
 import { tokenAuth } from './config/tokenauth';
 
@@ -12,6 +12,7 @@ function App() {
   if( token ){
     dispatch( getUserAction( token ) );
     tokenAuth( token );
+    dispatch( setTokenAction());
   }
 
   return (

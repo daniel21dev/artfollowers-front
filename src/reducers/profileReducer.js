@@ -3,7 +3,9 @@ import {types} from '../types';
 const initialState = {
     profile: null,
     error: null,
-    loading: false
+    loading: false,
+    followers: null,
+    following: null
 }
 
 
@@ -14,6 +16,7 @@ export default function profileReducer( state = initialState, action ){
         case types.GET_PROFILE:
         case types.UPDATE_PROFILE:
         case types.FOLLOW:
+        case types.GET_FOLLOWERS:
             return{
                 ...state,
                 loading: true,
@@ -24,16 +27,34 @@ export default function profileReducer( state = initialState, action ){
             return{
                 ...state,
                 profile: action.payload,
-                loading: false
+                loading: false,
+                error: null
+            }
+        case types.GET_FOLLOWERS_SUCCESS:
+            return{
+                ...state,
+                followers: action.payload,
+                loading: false,
+                error: null
+            }
+        case types.GET_FOLLOWING_SUCCESS:
+            return{
+                ...state,
+                following: action.payload,
+                loading: false,
+                error: null
             }
         case types.FOLLOW_SUCCESS:
             return{
                 ...state,
-                loading: false
+                loading: false,
+                error: null
             }
         case types.GET_PROFILE_ERROR:
         case types.UPDATE_PROFILE_ERROR:
         case types.FOLLOW_ERROR:
+        case types.GET_FOLLOWERS_ERROR:
+        case types.GET_FOLLOWING_ERROR:
             return{
                 ...state,
                 loading: false,

@@ -17,7 +17,7 @@ export const Post = ({post, userID}) => {
     return (
         <div className="post">
             <div className="post_info">
-                <img src={ user?.img } alt="user profile"/>
+                <img src={user.img || 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png'} alt="user profile"/>
                 <Link to={'/profile/'+user?._id} >{ user?.userName }</Link>
             </div>
             <div className="post_preview">
@@ -27,18 +27,20 @@ export const Post = ({post, userID}) => {
                 </p>
             </div>
             <div className="post_media">
-                <img src={media[0]} alt="post_img"/>
+                {
+                    media[0] && <img src={media[0]} alt="post_img"/>
+                }
             </div>
             <div className="post_interactions">
-                <p onClick={ handleLike }>
+                <button className="btn" onClick={ handleLike }>
                     {
                         likes.includes( userID )
                         ?<i  className="fas fa-heart"></i>
                         :<i  className="far fa-heart"></i>
                     }
                     { likes.length } Likes
-                </p>
-                <p><i className="far fa-comments"></i> Comments</p>
+                </button>
+                <button className="btn"><i className="far fa-comments"></i> Comments</button>
             </div>
         </div>
     )
