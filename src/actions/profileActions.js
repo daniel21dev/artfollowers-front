@@ -50,7 +50,8 @@ export const updateProfileAction = ( userID, description) =>{
         try {
             //return console.log('dispatch');
             const resp = await axiosClient.put(`/profiles/${userID}`,{
-                description
+                description,
+                headers:{'x-token': localStorage.getItem('token')}
             });
             dispatch( updateProfileSuccess( resp.data.profile ) );
         } catch (error) {

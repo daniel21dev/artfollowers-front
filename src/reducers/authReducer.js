@@ -29,8 +29,8 @@ export default function authReducer( state = initialState, action ){
                 loading: false
             }
         case types.REGISTER_USER_SUCCCESS:
-            localStorage.setItem('token', action.payload);
-            tokenAuth( action.payload );
+            localStorage.setItem('token', action.payload.token );
+            tokenAuth( action.payload.token );
             return{
                 ...state,
                 user: action.payload.user,
