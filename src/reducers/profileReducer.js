@@ -17,6 +17,7 @@ export default function profileReducer( state = initialState, action ){
         case types.UPDATE_PROFILE:
         case types.FOLLOW:
         case types.GET_FOLLOWERS:
+        case types.UPLOAD_PHOTO:
             return{
                 ...state,
                 loading: true,
@@ -50,11 +51,20 @@ export default function profileReducer( state = initialState, action ){
                 loading: false,
                 error: null
             }
+        case types.UPLOAD_PHOTO_USER_SUCCESS:
+        case types.UPLOAD_PHOTO_PROFILE_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                error: null,
+                profile: state.profile
+            }
         case types.GET_PROFILE_ERROR:
         case types.UPDATE_PROFILE_ERROR:
         case types.FOLLOW_ERROR:
         case types.GET_FOLLOWERS_ERROR:
         case types.GET_FOLLOWING_ERROR:
+        case types.UPLOAD_PHOTO_ERROR:
             return{
                 ...state,
                 loading: false,

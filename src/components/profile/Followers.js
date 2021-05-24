@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFollowersAction } from '../../actions/profileActions';
@@ -11,7 +11,7 @@ export const Followers = () => {
 
     useEffect(()=>{
         dispatch( getFollowersAction(followed) );
-    },[followed]);
+    },[followed, dispatch]);
 
     if( !followers ){
         return <p>loading... </p>

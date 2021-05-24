@@ -8,7 +8,7 @@ export const CategoriesPanel = () => {
     const dispatch = useDispatch();
 
     const handleClick = category =>{
-        dispatch( getPostsAction(category) );
+        dispatch( getPostsAction( '', category) );
     }
 
     return (

@@ -7,7 +7,6 @@ import { SignIn } from '../auth/SignIn';
 import { Home } from './../home/Home';
 import { Profile } from './../profile/Profile';
 import { useSelector } from 'react-redux';
-import { Followers } from './../profile/Followers';
 
 
 export const AppRouter = () => {

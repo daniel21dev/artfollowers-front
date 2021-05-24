@@ -17,7 +17,7 @@ export const ProfileContainer = ({id}) => {
         dispatch( resetProfileAction() );
         dispatch( getPostsAction() );
         dispatch( getProfileAction(id, user?._id) );
-    },[id, dispatch]);
+    },[id, user?._id, dispatch]);
 
     if( profile?.loading || !profile?.user ){
         return (

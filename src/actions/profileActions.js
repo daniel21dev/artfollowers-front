@@ -11,8 +11,6 @@ export const getProfileAction = ( userID, me ) =>{
             url = url + '?me=' + me;
         }
 
-        console.log( url );
-
         try {
             //return console.log('dispatch');
             const resp = await axiosClient.get(url);
@@ -77,6 +75,47 @@ const updateProfileSuccess = (profile) =>({
 
 const updateProfileError = error =>({
     type: types.UPDATE_PROFILE_ERROR,
+    payload: error
+});
+
+export const uploadPhotoAction = ( image, type) =>{
+    return async( dispatch ) =>{
+
+        dispatch( uploadPhoto() );
+        const formData = new FormData();
+        formData.append('image', image);
+        
+        try {
+            const resp = await axiosClient.post(`/upload/${type}`,formData,{
+                headers:{
+                    'Content-Type': 'multipart/form-data',
+                    'x-token': localStorage.getItem('token')
+                }
+            });
+            dispatch( uploadPhotoSuccess() );
+        } catch (error) {
+            if( error.response?.data ){
+                dispatch( uploadPhotoError( error.response.data.msg ) );
+            }else{
+                console.log( error.response );
+                dispatch( uploadPhotoError( 'Hubo un error' ) );
+            }
+        }
+    }
+}
+
+const uploadPhoto = () =>({
+    type: types.UPLOAD_PHOTO,
+    payload: true
+});
+
+const uploadPhotoSuccess = (profile) =>({
+    type: types.UPLOAD_PHOTO_SUCCESS,
+    payload: profile
+});
+
+const uploadPhotoError = error =>({
+    type: types.UPLOAD_PHOTO_ERROR,
     payload: error
 });
 

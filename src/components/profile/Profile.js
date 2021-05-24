@@ -10,14 +10,14 @@ import { useParams } from 'react-router';
 export const Profile = () => {
     
     const dispatch = useDispatch();
-    const {posts} = useSelector( state => state.posts );
-    const {user} = useSelector( state => state.auth );
-    const {id} = useParams();
+    const {posts}  = useSelector( state => state.posts );
+    const {user}   = useSelector( state => state.auth );
+    const {id}     = useParams();
 
     useEffect(()=>{
         dispatch( getPostsAction( id ) );
         dispatch( getCategoriesAction() );
-    },[dispatch, user]);
+    },[dispatch, user, id]);
 
     return (
         <>
@@ -26,6 +26,7 @@ export const Profile = () => {
                     id={id}
                 />
                 <PostsContainers  
+                    id={id}
                     posts={ posts }
                     user={ user }
                 />

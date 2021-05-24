@@ -1,14 +1,18 @@
-import React,{ useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPostsAction } from './../../actions/postsActions';
 
-export const PostsOptions = () => {
+export const PostsOptions = ({ user='' }) => {
     
     let {categories} = useSelector( state => state.posts );
     const dispatch = useDispatch();
 
     const handleClick = ( option ) =>{
-        dispatch( getPostsAction(option) );
+        dispatch( getPostsAction( user, '' , option) );
+    }
+
+    const handleSelect = ( category ) =>{
+        dispatch( getPostsAction( user, category ) );
     }
 
     return (
@@ -20,7 +24,7 @@ export const PostsOptions = () => {
                         className="dropdown-content" 
                         key={ category._id }
                         style={{ bottom: `calc( -80% * ${index+1})` }}
-                        onClick={ ()=> handleClick( category._id ) }
+                        onClick={ ()=> handleSelect( category._id ) }
                     >
                         { category.name }
                     </div>

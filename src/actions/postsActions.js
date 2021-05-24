@@ -1,17 +1,28 @@
 import {types} from '../types';
 import axiosClient from './../config/axios';
 
-export const getPostsAction = ( userID='' ) =>{
+export const getPostsAction = ( userID='', category='', option='') =>{
     return async( dispatch ) =>{
         dispatch( getPosts() );
 
         try {
-            let resp;
-            if( userID.length >1 ){
-                resp = await axiosClient.get('/posts?user='+userID);
+            let query;
+            if( userID.length >1 && option.length>1){
+                query = '/posts?option='+option+'&user='+userID;
+            }else if( userID.length >1 && category.length >1){
+                query = '/posts/'+category+'?user='+userID;
+            }else if( userID.length >1 ){
+                query = '/posts?user='+userID;
+            }else if( category.length >1 ){
+                query = '/posts/'+category;
+            }else if( option.length>1 ){
+                query = '/posts?option='+option;
             }else{
-                resp = await axiosClient.get('/posts');
+                query = '/posts';
             }
+
+            const resp = await axiosClient.get( query );
+            console.log( resp );
             dispatch( getPostsSuccess( resp.data.posts ) );
         } catch (error) {
             dispatch( getPostsError() );
