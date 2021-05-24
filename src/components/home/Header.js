@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutAction } from '../../actions/authActions';
+import { Search } from './Search';
 
 export const Header = () => {
 
@@ -15,10 +16,7 @@ export const Header = () => {
     return (
         <header className="header">
             <Link to='/' className="brand"> <strong>Art</strong>Followers </Link>
-            <div className="search">
-                <input className="search-bar" type="text" placeholder="Buscar"/>
-                <button type="submit" className="btn"> <i className="far fa-search"></i> </button>
-            </div>
+            <Search />
 
             <div className="header-profile">
 

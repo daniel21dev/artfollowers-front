@@ -30,6 +30,19 @@ export const getPostsAction = ( userID='', category='', option='') =>{
     }
 }
 
+export const searchPostsAction = ( query ) =>{
+    return async( dispatch ) =>{
+        dispatch( getPosts() );
+        try {
+            const resp = await axiosClient.get('/search?q='+ query );
+            console.log( resp );
+            dispatch( getPostsSuccess( resp.data.posts ) );
+        } catch (error) {
+            dispatch( getPostsError() );
+        }
+    }
+}
+
 const getPosts = () =>({
     type: types.GET_POSTS,
     payload: true
