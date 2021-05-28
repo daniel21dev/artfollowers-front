@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux';
 import { followAction } from './../../actions/profileActions';
+import { Link } from 'react-router-dom';
 
 export const ProfileButtons = ({profile,handleEdit,user,edit,setEdit}) => {
 
@@ -27,15 +28,20 @@ export const ProfileButtons = ({profile,handleEdit,user,edit,setEdit}) => {
                             { edit ? 'Save' : 'Edit' }
                             <i className="fas fa-pen"></i>
                         </button>
-                        {edit && <button 
-                            className="btn profile_btn text-red" 
-                            onClick={()=>setEdit(false)}
-                            >Cancel</button>}
+                        {
+                            edit && <button 
+                                className="btn profile_btn text-red" 
+                                onClick={()=>setEdit(false)}
+                            >Cancel</button>
+                        }
                     </>
                 : <>
-                    <button className="btn profile_btn">
-                        Subscribe for 1$
-                    </button>
+                    <Link 
+                        to={`/suscribe/${ profile.user._id }`}
+                        className="btn profile_btn">
+                        { profile.suscribed ? 'Suscribed'
+                        : 'Subscribe for 1$'}
+                    </Link>
                     <button className="btn profile_btn"
                         onClick={ handleFollow }
                     >

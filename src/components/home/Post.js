@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { likePostAction } from '../../actions/postsActions';
 
-export const Post = ({post, userID}) => {
+export const Post = ({post, userID, suscribed }) => {
 
     const dispatch = useDispatch();
     const {_id, desc, media, userID:user ,title, likes}= post;
@@ -28,7 +28,9 @@ export const Post = ({post, userID}) => {
             </div>
             <div className="post_media">
                 {
-                    media[0] && <img src={media[0]} alt="post_img"/>
+                    (post.private && !suscribed) && (userID !== user._id)
+                    ? <button> suscribe </button>
+                    : <img src={media[0]} alt="post_img"/>
                 }
             </div>
             <div className="post_interactions">

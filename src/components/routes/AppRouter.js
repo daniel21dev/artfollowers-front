@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
-//import { PrivateRoute } from './PrivateRoute'
+import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 import { Login } from '../auth/Login';
 import { SignIn } from '../auth/SignIn';
 import { Home } from './../home/Home';
 import { Profile } from './../profile/Profile';
 import { useSelector } from 'react-redux';
+import { SuscriptionScreen } from '../suscription/SuscriptionScreen';
 
 
 export const AppRouter = () => {
 
-    const isAuthenticated = useSelector(state => state.auth.loggedIn );
+    let isAuthenticated = useSelector(state => state.auth.loggedIn );
     
+    useEffect(()=>{
+        console.log( isAuthenticated );
+    },[ isAuthenticated ]);
+
     return (
         <Router>
             <div>
@@ -24,6 +29,10 @@ export const AppRouter = () => {
                     <PublicRoute path='/signin' 
                         component={ SignIn }
                         isAuthenticated={ isAuthenticated }    
+                    />
+                    <PrivateRoute path ='/suscribe/:id' 
+                        component={ SuscriptionScreen }
+                        isAuthenticated={ isAuthenticated }
                     />
 
                     <Route exact path='/' component={ Home } />

@@ -22,7 +22,6 @@ export const getPostsAction = ( userID='', category='', option='') =>{
             }
 
             const resp = await axiosClient.get( query );
-            console.log( resp );
             dispatch( getPostsSuccess( resp.data.posts ) );
         } catch (error) {
             dispatch( getPostsError() );
@@ -35,7 +34,6 @@ export const searchPostsAction = ( query ) =>{
         dispatch( getPosts() );
         try {
             const resp = await axiosClient.get('/search?q='+ query );
-            console.log( resp );
             dispatch( getPostsSuccess( resp.data.posts ) );
         } catch (error) {
             dispatch( getPostsError() );
@@ -82,6 +80,46 @@ const likePostSuccess = (id, userID) =>({
 
 const likePostError = () =>({
     type: types.LIKE_POSTS_ERROR,
+    payload: true
+});
+
+export const savePostAction = ( post, token ) =>{
+    return async( dispatch ) =>{
+        dispatch( savePost() );
+        try {
+            const data = new FormData();
+            data.append('media', post.media);
+            data.append('title', post.title);
+            data.append('desc', post.desc);
+            data.append('category', post.category);
+            data.append('private', post.priv);
+            const resp = await axiosClient.post('/posts',data,{
+                headers: { 
+                    'x-token': token
+                }
+            });
+            //console.log( resp.data.post );
+            dispatch( savePostSuccess( resp.data.post ) );
+            dispatch( getPostsAction( resp.data.post.userID ));
+        } catch (error) {
+            console.log( error.response );
+            dispatch( savePostError() );
+        }
+    }
+}
+
+const savePost = () =>({
+    type: types.SAVE_POST,
+    payload: true
+});
+
+const savePostSuccess = post =>({
+    type: types.SAVE_POST_SUCCESS,
+    payload: post
+});
+
+const savePostError = () =>({
+    type: types.SAVE_POST_ERROR,
     payload: true
 });
 

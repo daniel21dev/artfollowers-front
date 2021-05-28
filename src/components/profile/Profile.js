@@ -6,6 +6,7 @@ import { PostsContainers } from './../home/PostsContainers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsAction, getCategoriesAction } from './../../actions/postsActions';
 import { useParams } from 'react-router';
+import { PostForm } from './post/PostForm';
 
 export const Profile = () => {
     
@@ -25,6 +26,10 @@ export const Profile = () => {
                 <ProfileContainer 
                     id={id}
                 />
+                {
+                    id === user?._id 
+                    && <PostForm />
+                }
                 <PostsContainers  
                     id={id}
                     posts={ posts }

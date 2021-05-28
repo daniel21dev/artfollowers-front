@@ -12,11 +12,14 @@ export const ProfileDesc = ({profile,edit,description,handleChange}) => {
 
                 {
                     edit
-                    ? <textarea 
+                    ?<> <textarea 
                         name="description"
                         value={ description }
                         onChange={ handleChange }
                         />
+                        <label htmlFor="creator"> Creator </label>
+                        <input type="checkbox" name="creator" id="creator" />
+                        </>
                     :<p className="profile_desc">
                     { profile.description }
                     </p>

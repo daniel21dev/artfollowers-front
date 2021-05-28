@@ -14,6 +14,7 @@ export default function postsReducer( state = initialState, action ){
 
         case types.GET_POSTS:
         case types.GET_CATEGORIES:
+        case types.SAVE_POST:
             return{
                 ...state,
                 loading: true,
@@ -25,6 +26,12 @@ export default function postsReducer( state = initialState, action ){
                 posts: action.payload,
                 loading: false
             }
+        case types.SAVE_POST_SUCCESS:
+            return{
+                ...state,
+                error: false,
+                loading: false
+            }
         case types.GET_CATEGORIES_SUCCCESS:
             return{
                 ...state,
@@ -33,6 +40,7 @@ export default function postsReducer( state = initialState, action ){
             }
         case types.GET_POSTS_ERROR:
         case types.GET_CATEGORIES_ERROR:
+        case types.SAVE_POST_ERROR:
             return{
                 ...state,
                 loading: false,
@@ -45,12 +53,14 @@ export default function postsReducer( state = initialState, action ){
         case types.LIKE_POSTS_SUCCCESS:
             return{
                 ...state,
-                posts: evalLike( state.posts, action.payload )
+                posts: evalLike( state.posts, action.payload ),
+                loading: false
             }
         case types.LIKE_POSTS_ERROR:
             return{
                 ...state,
-                error: true
+                error: true,
+                loading: false
             }
         default: 
             return state;

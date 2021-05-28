@@ -1,5 +1,6 @@
 import axiosClient from './../config/axios';
 import { types } from './../types/index';
+import Swal from 'sweetalert2';
 
 export const getProfileAction = ( userID, me ) =>{
     return async( dispatch ) =>{
@@ -129,6 +130,7 @@ export const followAction = ( followed, me ) =>{
                 headers:{'x-token': localStorage.getItem('token')}
             });
             dispatch( followSuccess() );
+            Swal.fire('Listo');
             dispatch( getProfileAction( followed, me ) );
         } catch (error) {
             if( error.response?.data ){
