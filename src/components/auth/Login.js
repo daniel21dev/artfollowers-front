@@ -9,6 +9,7 @@ export const Login = ({history}) => {
 
     const dispatch = useDispatch();
     const { error } = useSelector( state => state.auth );
+
     const [fieldsError, setFieldsError] = useState({
         error: false,
         msg: ''

@@ -66,6 +66,11 @@ export default function authReducer( state = initialState, action ){
             return{
                 ...initialState
             }
+        case types.REMOVE_ERROR:
+            return{
+                ...state,
+                error: null
+            }
         default: 
             return state;
     }

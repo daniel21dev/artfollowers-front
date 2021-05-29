@@ -14,7 +14,7 @@ export const PostForm = () => {
         category: categories[0]?._id,
         media: null,
         priv: false
-    })
+    });
 
     const {title,desc,category,priv} = values;
 

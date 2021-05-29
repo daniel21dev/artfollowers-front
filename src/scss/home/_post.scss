@@ -57,3 +57,43 @@
     }
   }
 }
+
+.post_head {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .more {
+    height: 1rem;
+    position: relative;
+    color: $secundary;
+    i {
+      transform: rotate(90deg);
+    }
+
+    .more_options {
+      position: absolute;
+      display: none;
+      background-color: $back-color;
+      box-shadow: 0 0 10px $secundary;
+      border-radius: 5px;
+      right: 50%;
+      overflow: hidden;
+      color: $primary;
+
+      div {
+        padding: 0.5rem;
+        &:hover {
+          background-color: $primary;
+          color: $back-color;
+        }
+      }
+    }
+
+    &:hover {
+      .more_options {
+        display: block;
+      }
+    }
+  }
+}

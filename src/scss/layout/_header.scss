@@ -26,7 +26,7 @@
 }
 
 .search-bar {
-  padding: 5px 1rem;
+  padding: 5px 0.5rem;
   border: 2px solid gray;
   border-radius: 5px;
 }
@@ -50,5 +50,5 @@
 .search button {
   background-color: $primary;
   color: white;
-  border-radius: none;
+  padding: 5px 10px;
 }

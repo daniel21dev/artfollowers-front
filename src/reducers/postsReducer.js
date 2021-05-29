@@ -15,6 +15,7 @@ export default function postsReducer( state = initialState, action ){
         case types.GET_POSTS:
         case types.GET_CATEGORIES:
         case types.SAVE_POST:
+        case types.DELETE_POST:
             return{
                 ...state,
                 loading: true,
@@ -24,6 +25,12 @@ export default function postsReducer( state = initialState, action ){
             return{
                 ...state,
                 posts: action.payload,
+                loading: false
+            }
+        case types.DELETE_POST_SUCCESS:
+            return{
+                ...state,
+                posts: state.posts.filter( post => post._id !== action.payload) ,
                 loading: false
             }
         case types.SAVE_POST_SUCCESS:
@@ -41,6 +48,7 @@ export default function postsReducer( state = initialState, action ){
         case types.GET_POSTS_ERROR:
         case types.GET_CATEGORIES_ERROR:
         case types.SAVE_POST_ERROR:
+        case types.DELETE_POST_ERROR:
             return{
                 ...state,
                 loading: false,

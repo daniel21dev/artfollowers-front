@@ -1,5 +1,6 @@
 import {types} from '../types';
 import axiosClient from './../config/axios';
+import swal from 'sweetalert2';
 
 export const getPostsAction = ( userID='', category='', option='') =>{
     return async( dispatch ) =>{
@@ -80,6 +81,34 @@ const likePostSuccess = (id, userID) =>({
 
 const likePostError = () =>({
     type: types.LIKE_POSTS_ERROR,
+    payload: true
+});
+
+export const deletePostAction = ( id ) =>{
+    return async( dispatch ) =>{
+        dispatch( deletePost() );
+        try {
+            await axiosClient.delete('/posts/'+id);
+            dispatch( deletePostSuccess(id) );
+        } catch (error) {
+            swal.fire('there was an error');
+            dispatch( deletePostError() );
+        }
+    }
+}
+
+const deletePost = () =>({
+    type: types.DELETE_POST,
+    payload: true
+});
+
+const deletePostSuccess = id =>({
+    type: types.DELETE_POST_SUCCESS,
+    payload: id
+});
+
+const deletePostError = () =>({
+    type: types.DELETE_POST_ERROR,
     payload: true
 });
 

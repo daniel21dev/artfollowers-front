@@ -20,6 +20,9 @@ export const loginAction = (email,password, history) =>{
             }else{
                 dispatch( registerUserError('there was an error') );
             }
+            setTimeout(()=>{
+                dispatch( removeError() );
+            }, 3000);
         }
     }
 }
@@ -63,6 +66,9 @@ export const getUserAction = ( token ) =>{
                 dispatch( getUserError('there was an error') );
                 dispatch( logoutAction() );
             }
+            setTimeout(()=>{
+                dispatch( removeError() );
+            }, 3000);
         }
     }
 }
@@ -101,6 +107,9 @@ export const registerAction = (name,userName,email,password) =>{
             }else{
                 dispatch( registerUserError('there was an error') );
             }
+            setTimeout(()=>{
+                dispatch( removeError() );
+            }, 3000);
         }
     }
 }
@@ -141,4 +150,6 @@ const logout = () =>({
     type: types.LOGOUT
 });
 
-
+const removeError = () =>({
+    type: types.REMOVE_ERROR
+})

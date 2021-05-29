@@ -9,17 +9,17 @@
   padding: 0 1rem;
   border-radius: 5px;
   flex: 2 1 auto;
+}
 
-  .option {
-    width: auto;
-    padding: 1rem;
-    background: $back-color;
+.option {
+  width: auto;
+  padding: 1rem;
+  background: $back-color;
 
-    &:hover {
-      cursor: pointer;
-      background: linear-gradient(to top, darken($primary, 10%), $primary);
-      color: $back-color;
-    }
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(to top, darken($primary, 10%), $primary);
+    color: $back-color;
   }
 }
 
