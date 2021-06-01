@@ -1,0 +1,79 @@
+.payment_profile {
+  width: 100%;
+  margin: 4rem auto 0 auto;
+  background: linear-gradient(45deg, $primary, $back-color);
+  padding: 1rem;
+  box-shadow: 0 0 10px $secundary;
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-between;
+
+  .text {
+    font-weight: 700;
+    display: flex;
+    font-size: 1.3rem;
+    color: $secundary;
+    flex-direction: column;
+    span {
+      color: $primary;
+      text-shadow: 0 0 5px $back-color;
+      animation: bounce 1s linear infinite;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  }
+
+  .user_info {
+    display: flex;
+    width: 25%;
+    color: $secundary;
+    font-weight: bold;
+    text-shadow: 0 0 5px $back-color;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    .desc {
+      position: absolute;
+      width: 300%;
+      overflow: hidden;
+      animation: bounce2 1s linear infinite;
+    }
+  }
+  img {
+    width: 5rem;
+    border-radius: 50%;
+    border: 2px solid $secundary;
+  }
+  @include small() {
+    width: 600px;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+    color: white;
+  }
+  50% {
+    transform: scale(1.5);
+    color: $primary;
+  }
+  100% {
+    transform: scale(1);
+    color: $primary;
+  }
+}
+
+@keyframes bounce2 {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateY(0.5rem);
+  }
+  100% {
+    transform: scale(1);
+    transform: scale(1) translateY(0);
+  }
+}

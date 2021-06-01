@@ -97,3 +97,27 @@
     }
   }
 }
+
+.private_preview {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lighten($primary, 20%);
+
+  .profile_btn {
+    background-color: transparent;
+    border-radius: 999px;
+    margin: 0 0.25rem;
+    padding: 10px;
+    color: $primary;
+    font-weight: 700;
+    border: 1px solid $primary;
+    //text-shadow: 0 0 3px $secundary;
+
+    &:hover {
+      color: white;
+      background: $purplin;
+    }
+  }
+}

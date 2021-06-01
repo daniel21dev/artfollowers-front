@@ -1,21 +1,16 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { uploadPhotoAction } from './../../actions/profileActions';
+import swal from 'sweetalert2';
 
-export const ProfilePhotos = ({profile, edit}) => {
-
-    const dispatch = useDispatch();
+export const ProfilePhotos = ({profile, edit, setPhotos}) => {
 
     const handleUploadImage = e =>{
         const img =  e.target.files[0];
 
         if( !img.type.includes('image') ){
-           // todo alert 
-           console.log( img.type );
-           return;
+           return swal.fire('Must be a file type image')
         }
-        
-        dispatch( uploadPhotoAction(img, e.target.name) );
+
+        setPhotos( photos => ({...photos, [e.target.name]: img}));
     }
 
     return (
@@ -32,6 +27,7 @@ export const ProfilePhotos = ({profile, edit}) => {
                         type="file" 
                         name="banner" 
                         id="banner"
+                        onChange={ handleUploadImage }
                     />
                 }
                 

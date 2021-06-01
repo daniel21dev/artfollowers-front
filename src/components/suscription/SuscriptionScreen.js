@@ -49,6 +49,21 @@ export const SuscriptionScreen = () => {
     return (
         <>
             <Header />
+                <div className="payment_profile">
+                    <div className="user_info">
+                        <img src={ profile.user.img } alt="user" />
+                        <div>
+                            <p>{ profile.user.name }</p>
+                            <span>@{ profile.user.userName }</span>
+                            <p className="desc">{ profile.description }</p>
+                        </div>
+                    </div>
+                    <div className="text">
+                        Get access for exclusive content 
+                        <span> Only for 5$</span>
+                    </div>
+                    
+                </div>
                 <div className="auth_container">
                 <form className="auth_form" onSubmit={ handleSubmit }>
                 <h1>payment</h1>

@@ -2,24 +2,24 @@ import {types} from '../types';
 import axiosClient from './../config/axios';
 import swal from 'sweetalert2';
 
-export const getPostsAction = ( userID='', category='', option='') =>{
+export const getPostsAction = ( userID='', category='', option='', from='0') =>{
     return async( dispatch ) =>{
         dispatch( getPosts() );
 
         try {
             let query;
             if( userID.length >1 && option.length>1){
-                query = '/posts?option='+option+'&user='+userID;
+                query = '/posts?option='+option+'&user='+userID+'&from='+from;
             }else if( userID.length >1 && category.length >1){
-                query = '/posts/'+category+'?user='+userID;
+                query = '/posts/'+category+'?user='+userID+'&from='+from;
             }else if( userID.length >1 ){
-                query = '/posts?user='+userID;
+                query = '/posts?user='+userID+'&from='+from;
             }else if( category.length >1 ){
-                query = '/posts/'+category;
+                query = '/posts/'+category+'?from='+from;;
             }else if( option.length>1 ){
-                query = '/posts?option='+option;
+                query = '/posts?option='+option+'?from='+from;;
             }else{
-                query = '/posts';
+                query = '/posts'+'?from='+from;;
             }
 
             const resp = await axiosClient.get( query );
@@ -42,6 +42,12 @@ export const searchPostsAction = ( query ) =>{
     }
 }
 
+export const getNextPosts = ( userID='', category='', option='', from='1') =>{
+    return async( dispatch )=>{
+              
+    }
+}
+
 const getPosts = () =>({
     type: types.GET_POSTS,
     payload: true
@@ -55,6 +61,10 @@ const getPostsSuccess = posts =>({
 const getPostsError = () =>({
     type: types.GET_POSTS_ERROR,
     payload: true
+});
+
+const addPage = () =>({
+    type: types.ADD_PAGE
 });
 
 export const likePostAction = ( id, userID ) =>{

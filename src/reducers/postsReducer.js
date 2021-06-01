@@ -4,7 +4,8 @@ const initialState = {
     posts:[],
     error: null,
     loading: false,
-    categories: []
+    categories: [],
+    page: 1
 }
 
 
@@ -69,6 +70,11 @@ export default function postsReducer( state = initialState, action ){
                 ...state,
                 error: true,
                 loading: false
+            }
+        case types.ADD_PAGE:
+            return{
+                ...state,
+                page: state.page +1
             }
         default: 
             return state;

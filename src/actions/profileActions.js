@@ -94,6 +94,7 @@ export const uploadPhotoAction = ( image, type) =>{
                 }
             });
             dispatch( uploadPhotoSuccess() );
+            dispatch( getProfileAction() );
         } catch (error) {
             if( error.response?.data ){
                 dispatch( uploadPhotoError( error.response.data.msg ) );

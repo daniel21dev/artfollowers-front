@@ -3,6 +3,7 @@ import { Post } from './Post';
 import { PostsOptions } from './PostsOptions';
 import { CategoriesPanel } from './CategoriesPanel';
 import { useSelector } from 'react-redux';
+import { LoadMore } from './LoadMore';
 
 export const PostsContainers = ({posts, user, id=''}) => {
 
@@ -15,7 +16,7 @@ export const PostsContainers = ({posts, user, id=''}) => {
 
     return (
         <main className="posts_container">
-            <CategoriesPanel />
+            { !id.length>0 && <CategoriesPanel />}
             <PostsOptions user={ id }/>
             {
                 posts.length === 0
@@ -28,6 +29,7 @@ export const PostsContainers = ({posts, user, id=''}) => {
                     />
                 ))
             }
+            <LoadMore />
         </main>
     )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deletePostAction, likePostAction } from '../../actions/postsActions';
 import swal from 'sweetalert2';
+import { PrivatePreview } from './PrivatePreview';
 
 export const Post = ({post, userID, suscribed }) => {
 
@@ -71,8 +72,10 @@ export const Post = ({post, userID, suscribed }) => {
             <div className="post_media">
                 {
                     (post.private && !suscribed) && (userID !== user._id)
-                    ? <button> suscribe </button>
-                    : <img src={media[0]} alt="post_img"/>
+                    ? <PrivatePreview 
+                        userID={ user?._id }
+                    />
+                    : media[0] !== "null" && <img src={media[0]} alt="post_img"/>
                 }
             </div>
             <div className="post_interactions">

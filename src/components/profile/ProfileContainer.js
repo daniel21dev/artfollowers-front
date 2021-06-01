@@ -11,6 +11,7 @@ export const ProfileContainer = ({id}) => {
     const {profile} = useSelector( state => state.profile );
     const {user} = useSelector( state => state.auth );
     const [edit, setEdit] = useState(false);
+    const [photos, setPhotos] = useState({ banner: null, user: null});
     const dispatch = useDispatch();
     
     useEffect(()=>{
@@ -35,12 +36,14 @@ export const ProfileContainer = ({id}) => {
             <ProfilePhotos 
                 profile={ profile } 
                 edit={ edit }
+                setPhotos={ setPhotos }
                 />
             <ProfileInfo 
                 profile={ profile }
                 user={ user }
                 edit={ edit } 
                 setEdit={setEdit}
+                photos={ photos }
                 />
         </div>
     )

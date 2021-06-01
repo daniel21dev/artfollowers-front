@@ -2,10 +2,10 @@ import React from 'react'
 import { useForm } from './../../hooks/useForm';
 import { useDispatch } from 'react-redux';
 import { ProfileButtons } from './ProfileButtons';
-import { updateProfileAction } from '../../actions/profileActions';
+import { updateProfileAction, uploadPhotoAction } from '../../actions/profileActions';
 import { ProfileDesc } from './ProfileDesc';
 
-export const ProfileInfo = ({profile,user,edit,setEdit}) => {
+export const ProfileInfo = ({profile,user,edit,setEdit, photos}) => {
 
     const initialFormValues = {
         description: profile.description || ''
@@ -23,13 +23,19 @@ export const ProfileInfo = ({profile,user,edit,setEdit}) => {
             return setEdit( true );
         }
 
-        description.trim();
-
-        if( description === ''){
-            // TODO handle error
-            return;
+        if( description !== profile.description ){
+            description.trim();
+            dispatch( updateProfileAction( user._id, description) );
         }
-        dispatch( updateProfileAction( user._id, description) );
+
+        if( photos.banner ){
+            dispatch( uploadPhotoAction( photos.banner, 'banner') );
+        }
+
+        if( photos.user ){
+            dispatch( uploadPhotoAction( photos.user, 'user') );
+        }
+
         setEdit(false);
     }
 

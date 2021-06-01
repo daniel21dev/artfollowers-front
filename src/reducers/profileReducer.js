@@ -56,8 +56,7 @@ export default function profileReducer( state = initialState, action ){
             return{
                 ...state,
                 loading: false,
-                error: null,
-                profile: state.profile
+                error: null
             }
         case types.GET_PROFILE_ERROR:
         case types.UPDATE_PROFILE_ERROR:

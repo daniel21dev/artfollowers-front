@@ -1,0 +1,22 @@
+.load_more {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $back-color;
+  box-shadow: 0 0 15px $secundary;
+
+  border-radius: 5px;
+  height: 4rem;
+
+  i {
+    font-size: 2rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: $primary;
+    color: $back-color;
+    border: 1px solid $secundary;
+  }
+}
