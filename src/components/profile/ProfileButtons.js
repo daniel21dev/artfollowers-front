@@ -37,10 +37,12 @@ export const ProfileButtons = ({profile,handleEdit,user,edit,setEdit}) => {
                     </>
                 : <>
                     <Link 
-                        to={`/suscribe/${ profile.user._id }`}
-                        className="btn profile_btn">
+                        to={ !profile.suscribed && `/suscribe/${ profile.user._id }`}
+                        className="btn profile_btn"
+                        disabled={ profile.suscribed }
+                        >
                         { profile.suscribed ? 'Suscribed'
-                        : 'Subscribe for 1$'}
+                        : 'Subscribe for 5$'}
                     </Link>
                     <button className="btn profile_btn"
                         onClick={ handleFollow }

@@ -41,6 +41,9 @@ export const Post = ({post, userID, suscribed }) => {
           })
     }
 
+    if( !post ){
+        return <p>loading...</p>;
+    }
     return (
         <div className="post">
 
@@ -60,7 +63,8 @@ export const Post = ({post, userID, suscribed }) => {
                 <button className="more btn">
                     <i class="fas fa-ellipsis-h"></i>
                     <div className="more_options">
-                        <div>Share</div>
+                        <div
+                        >Share</div>
                         {
                             user._id === userID &&
                             <div onClick={ handleDelete }>Delete</div>
@@ -87,7 +91,7 @@ export const Post = ({post, userID, suscribed }) => {
                     }
                     { likes.length } Likes
                 </button>
-                <button className="btn"><i className="far fa-comments"></i> Comments</button>
+                {/* <button className="btn"><i className="far fa-comments"></i> Comments</button> */}
             </div>
         </div>
     )
